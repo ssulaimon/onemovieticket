@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "895111842702",
+    "project_id": "onemovieticketbehaceproject",
+    "storage_bucket": "onemovieticketbehaceproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895111842702:android:8e5bfbd280936d0f3072df",
+        "android_client_info": {
+          "package_name": "com.onemovieticket.onemovieticket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895111842702-77rknc09meds6oa3udfisu475sj88sgp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO1U3Pn47wwmchCkJFyA5QgIxliZDAwfo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895111842702-77rknc09meds6oa3udfisu475sj88sgp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
