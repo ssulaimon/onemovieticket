@@ -1,4 +1,8 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:onemovieticket/class/authentication.dart';
 import 'package:onemovieticket/routes/routes.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,6 +13,24 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late TextEditingController email;
+  late TextEditingController password;
+  @override
+  void initState() {
+    email = TextEditingController();
+    password = TextEditingController();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    email.dispose();
+    password.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +72,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 10.0,
                     ),
                     TextField(
-                      keyboardType: TextInputType.number,
+                      controller: email,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         label: const Icon(
                           Icons.email,
@@ -64,6 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 10.0,
                     ),
                     TextField(
+                      controller: password,
                       obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       decoration: InputDecoration(
@@ -108,6 +132,24 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
+                      onTap: () async {
+                        AuthenticateUser()
+                            .loginUser(
+                                email: email.text, password: password.text)
+                            .then((result) {
+                          if (result == null) {
+                            log('This is real user');
+                          } else if (result == 'user-not-found') {
+                            log('user is not found ');
+                          } else if (result == 'network-request-failed') {
+                            log('check your internet connection');
+                          } else if (result == 'wrong-password') {
+                            log('Password in correct');
+                          } else {
+                            log(result);
+                          }
+                        });
+                      },
                     ),
                     const Text(
                       'or',

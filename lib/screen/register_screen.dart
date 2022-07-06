@@ -1,4 +1,8 @@
+import 'dart:developer';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:onemovieticket/class/authentication.dart';
 import 'package:onemovieticket/routes/routes.dart';
 
 class Register extends StatefulWidget {
@@ -7,6 +11,9 @@ class Register extends StatefulWidget {
   @override
   State<Register> createState() => _RegisterState();
 }
+
+TextEditingController email = TextEditingController();
+TextEditingController password = TextEditingController();
 
 class _RegisterState extends State<Register> {
   @override
@@ -50,6 +57,7 @@ class _RegisterState extends State<Register> {
                       height: 10.0,
                     ),
                     TextField(
+                      controller: email,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: 'E-mail',
@@ -65,6 +73,7 @@ class _RegisterState extends State<Register> {
                       height: 10.0,
                     ),
                     TextField(
+                      controller: password,
                       obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       decoration: InputDecoration(
@@ -83,6 +92,35 @@ class _RegisterState extends State<Register> {
                       height: 20.0,
                     ),
                     GestureDetector(
+                      onTap: (() => AuthenticateUser()
+                              .createUser(
+                            email: email.text,
+                            password: password.text,
+                          )
+                              .then(
+                            (result) {
+                              switch (result) {
+                                case null:
+                                  log('This is real user');
+                                  break;
+                                case ' The email address is badly formatted.':
+                                  log('Wrong e-mail format');
+                                  break;
+                                case 'The email address is already in use by another account.':
+                                  log('E-mail already existed');
+                                  break;
+                                case 'Password should be at least 6 characters':
+                                  log('Password should be 6 lenght long');
+                                  break;
+                                case 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.':
+                                  log('check your internet connection');
+                                  break;
+                                default:
+                                  log(result);
+                                  break;
+                              }
+                            },
+                          )),
                       child: Container(
                         padding: EdgeInsets.all(13.0),
                         width: double.infinity,

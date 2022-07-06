@@ -1,6 +1,10 @@
+import 'dart:developer';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:onemovieticket/class/authentication.dart';
 import 'package:onemovieticket/routes/routes.dart';
 
 class ForgetPassword extends StatefulWidget {
@@ -11,6 +15,7 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
+  TextEditingController email = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +64,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       height: 30.0,
                     ),
                     TextField(
+                      controller: email,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: 'E-mail',
@@ -77,6 +83,27 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       height: 20.0,
                     ),
                     GestureDetector(
+                      onTap: () => AuthenticateUser()
+                          .passwordRest(email: email.text)
+                          .then((result) {
+                        switch (result) {
+                          case null:
+                            log('This is a real user here');
+                            break;
+                          case 'The email address is badly formatted.':
+                            log('Wrong e-mail formatt');
+                            break;
+                          case 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.':
+                            log('Check your internet connection');
+                            break;
+                          case 'There is no user record corresponding to this identifier. The user may have been deleted.':
+                            log('This user is not found');
+                            break;
+                          default:
+                            log(result);
+                            break;
+                        }
+                      }),
                       child: Container(
                         padding: EdgeInsets.all(13.0),
                         width: double.infinity,
@@ -85,7 +112,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                             color: Colors.red),
                         child: const Center(
                           child: Text(
-                            'Register now',
+                            'send password reset link',
                             style: TextStyle(
                               color: Colors.white,
                             ),
