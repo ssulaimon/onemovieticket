@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -98,7 +99,12 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 child: IconButton(
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, login);
+                    FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+                    if (firebaseAuth.currentUser == null) {
+                      Navigator.popAndPushNamed(context, login);
+                    } else {
+                      Navigator.popAndPushNamed(context, home);
+                    }
                   },
                   icon: const Icon(
                     Icons.arrow_forward,

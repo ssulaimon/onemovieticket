@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:onemovieticket/class/authentication.dart';
 import 'package:onemovieticket/routes/routes.dart';
 
@@ -118,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     GestureDetector(
                       child: Container(
-                        padding: EdgeInsets.all(13.0),
+                        padding: const EdgeInsets.all(13.0),
                         width: double.infinity,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.0),
@@ -138,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 email: email.text, password: password.text)
                             .then((result) {
                           if (result == null) {
-                            log('This is real user');
+                            Navigator.popAndPushNamed(context, home);
                           } else if (result == 'user-not-found') {
                             log('user is not found ');
                           } else if (result == 'network-request-failed') {
@@ -186,34 +187,39 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
+                          onTap: () async {
+                            AuthenticateUser().googleSignIn();
+                          },
                         ),
                         GestureDetector(
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                20.0,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  20.0,
+                                ),
                               ),
-                            ),
-                            // ignore: sort_child_properties_last
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: const [
-                                  Image(
-                                    image: AssetImage('images/ff.png'),
-                                    width: 15.0,
-                                    height: 15.0,
-                                  ),
-                                  SizedBox(
-                                    width: 10.0,
-                                  ),
-                                  Text('Facebook')
-                                ],
+                              // ignore: sort_child_properties_last
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: const [
+                                    Image(
+                                      image: AssetImage('images/ff.png'),
+                                      width: 15.0,
+                                      height: 15.0,
+                                    ),
+                                    SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    Text('Facebook')
+                                  ],
+                                ),
                               ),
+                              elevation: 10.0,
                             ),
-                            elevation: 10.0,
-                          ),
-                        )
+                            onTap: () async {
+                              AuthenticateUser().facebookLogin();
+                            }),
                       ],
                     ),
                     Row(
