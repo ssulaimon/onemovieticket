@@ -188,7 +188,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           onTap: () async {
-                            AuthenticateUser().googleSignIn();
+                            AuthenticateUser().googleSignIn().whenComplete(
+                                  () => Navigator.popAndPushNamed(
+                                    context,
+                                    home,
+                                  ),
+                                );
                           },
                         ),
                         GestureDetector(
