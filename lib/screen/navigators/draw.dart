@@ -20,9 +20,12 @@ class ProfileDrawer extends StatelessWidget {
                 radius: 80.0,
               ),
             ),
-            const ListTile(
+            ListTile(
               leading: Icon(Iconsax.edit),
               title: Text(' Profile'),
+              onTap: () {
+                Navigator.pushNamed(context, profile);
+              },
             ),
             ListTile(
               leading: const Icon(Iconsax.logout),

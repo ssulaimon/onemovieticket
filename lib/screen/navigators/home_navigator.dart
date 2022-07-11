@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:onemovieticket/class/authentication.dart';
 import 'package:onemovieticket/screen/navigators/draw.dart';
-import 'package:onemovieticket/screen/navigators/trending_movie_tab.dart';
+import 'package:onemovieticket/screen/navigators/tab_layout_bolly.dart';
+import 'package:onemovieticket/screen/navigators/tab_layout_chinese.dart';
+import 'package:onemovieticket/screen/navigators/tab_layout_english.dart';
+import 'package:onemovieticket/screen/navigators/tab_layout_trending.dart';
 
 class HomeNavigator extends StatefulWidget {
   const HomeNavigator({Key? key}) : super(key: key);
@@ -11,10 +15,11 @@ class HomeNavigator extends StatefulWidget {
 }
 
 class _HomeNavigatorState extends State<HomeNavigator> {
+  String? username = AuthenticateUser().userName();
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 4,
       child: Scaffold(
         backgroundColor: Colors.white,
         drawer: const ProfileDrawer(),
@@ -22,9 +27,12 @@ class _HomeNavigatorState extends State<HomeNavigator> {
           elevation: 0.0,
           backgroundColor: Colors.white,
           centerTitle: true,
-          title: const Text(
-            "Welcome username",
-            style: TextStyle(color: Colors.black),
+          title: Text(
+            'Welcome ${username!}',
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+            ),
           ),
           leading: Builder(builder: (BuildContext context) {
             return IconButton(
@@ -45,10 +53,6 @@ class _HomeNavigatorState extends State<HomeNavigator> {
                 style: TextStyle(fontSize: 10, color: Colors.black),
               ),
               Text(
-                'New',
-                style: TextStyle(fontSize: 10, color: Colors.black),
-              ),
-              Text(
                 'Bolly',
                 style: TextStyle(fontSize: 10, color: Colors.black),
               ),
@@ -59,15 +63,12 @@ class _HomeNavigatorState extends State<HomeNavigator> {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            const TrendingMovie(),
-            Container(
-              color: Colors.grey.withOpacity(0.10),
-            ),
-            Text('3'),
-            Text('4'),
-            Text('5'),
+            TabLayoutsTrending(),
+            TabLayoutEnglish(),
+            TabLayoutsBolly(),
+            TabLayoutsChinese()
           ],
         ),
       ),

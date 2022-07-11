@@ -56,59 +56,43 @@ class EditedContainer extends StatelessWidget {
           const SizedBox(
             height: 150,
           ),
-          Align(
-            alignment: Alignment.center,
-            child: Container(
-              margin: const EdgeInsets.all(5.0),
-              padding: const EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(10.0)),
-              child: Column(
-                children: [
-                  Row(
+          Container(
+            margin: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.9),
+                borderRadius: BorderRadius.circular(10.0)),
+            child: Column(
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 8.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 1.0),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(
                     children: [
-                      Text(
-                        title,
-                        style: const TextStyle(fontSize: 11.0),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Book now',
+                          style: TextStyle(fontSize: 10.0, color: Colors.red),
+                        ),
                       ),
                       const SizedBox(
-                        width: 15.0,
+                        width: 30.0,
                       ),
-                      const Icon(
-                        Iconsax.star,
-                        color: Colors.yellowAccent,
-                        size: 10,
-                      ),
-                      Text(
-                        rating,
-                        style: const TextStyle(fontSize: 10.0),
-                      )
+                      Text('\$30.00')
                     ],
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 1.0),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(
-                      children: [
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Book now',
-                            style: TextStyle(fontSize: 10.0, color: Colors.red),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 30.0,
-                        ),
-                        Text('\$30.00')
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           )
         ],

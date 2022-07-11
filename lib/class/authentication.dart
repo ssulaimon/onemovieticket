@@ -7,6 +7,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthenticateUser {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   void get user => _auth.currentUser;
+  String? userName() {
+    if (_auth.currentUser?.displayName == null) {
+      return 'Please update your account';
+    } else {
+      return _auth.currentUser?.displayName;
+    }
+  }
 
   Future createUser({required String email, required String password}) async {
     try {

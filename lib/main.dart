@@ -5,6 +5,7 @@ import 'package:onemovieticket/routes/routes.dart';
 import 'package:onemovieticket/screen/forgetpassword_screen.dart';
 import 'package:onemovieticket/screen/home_screen.dart';
 import 'package:onemovieticket/screen/login.dart';
+import 'package:onemovieticket/screen/profile.dart';
 import 'package:onemovieticket/screen/register_screen.dart';
 import 'package:onemovieticket/screen/splashScreen.dart';
 
@@ -20,6 +21,7 @@ void main() async {
         register: (context) => const Register(),
         forgetPassword: (context) => const ForgetPassword(),
         home: (context) => const HomeScreen(),
+        profile: (context) => const Profile(),
       },
     ),
   );
