@@ -69,4 +69,8 @@ class AuthenticateUser {
   Future logoutFacebookAcc() async {
     return await FacebookAuth.instance.logOut();
   }
+
+  Future signoutUser() async {
+    return await FirebaseAuth.instance.signOut();
+  }
 }

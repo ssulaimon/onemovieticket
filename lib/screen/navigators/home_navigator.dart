@@ -59,10 +59,12 @@ class _HomeNavigatorState extends State<HomeNavigator> {
             ],
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
-            TrendingMovie(),
-            Text('2'),
+            const TrendingMovie(),
+            Container(
+              color: Colors.grey.withOpacity(0.10),
+            ),
             Text('3'),
             Text('4'),
             Text('5'),
