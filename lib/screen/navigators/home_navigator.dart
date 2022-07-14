@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:onemovieticket/class/authentication.dart';
-import 'package:onemovieticket/screen/navigators/draw.dart';
+import 'package:onemovieticket/routes/routes.dart';
+
 import 'package:onemovieticket/screen/navigators/tab_layout_bolly.dart';
 import 'package:onemovieticket/screen/navigators/tab_layout_chinese.dart';
 import 'package:onemovieticket/screen/navigators/tab_layout_english.dart';
@@ -15,33 +16,35 @@ class HomeNavigator extends StatefulWidget {
 }
 
 class _HomeNavigatorState extends State<HomeNavigator> {
-  String? username = AuthenticateUser().userName();
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
         backgroundColor: Colors.white,
-        drawer: const ProfileDrawer(),
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: Colors.white,
-          centerTitle: true,
-          title: Text(
-            'Welcome ${username!}',
-            style: const TextStyle(
+          title: const Text(
+            'Welcome Back',
+            style: TextStyle(
               color: Colors.black,
               fontSize: 15,
             ),
           ),
-          leading: Builder(builder: (BuildContext context) {
-            return IconButton(
+          actions: [
+            IconButton(
+              onPressed: () async {
+                await AuthenticateUser().googleLooutUser();
+                await AuthenticateUser().googleLooutUser();
+                Navigator.popAndPushNamed(context, login);
+              },
+              icon: const Icon(
+                Iconsax.logout,
                 color: Colors.black,
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                icon: const Icon(Iconsax.user_cirlce_add));
-          }),
+              ),
+            )
+          ],
           bottom: const TabBar(
             tabs: [
               Text(
